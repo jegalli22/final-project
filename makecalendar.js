@@ -1,5 +1,5 @@
 /* 
-from JavaScript Bible, Fourth Edition    by Danny Goodman    John Wiley & Sons CopyRight 2001 
+modified from JavaScript Bible, Fourth Edition    by Danny Goodman    John Wiley & Sons CopyRight 2001 
 */
 /*******************
   UTILITY FUNCTIONS
@@ -77,8 +77,12 @@ function populateTable(form) {
                 done = true
             }
             // plug in date (or empty for boxes after last day)
+            newC.classList.add("calDate");
+            newC.id = "cal-"+dayCounter+"-"+(i+1); //added class and id to help with our selecting
+            newC.addEventListener('click', calSelect, false); //added event listener to select date
             newC.innerHTML = (dayCounter <= howMany) ? 
                 dayCounter++ : ""
+            
         }
         
     }
@@ -100,4 +104,17 @@ function fillYears() {
 // set month choice to current month
 function setCurrMonth(today) {
     document.dateChooser.chooseMonth.selectedIndex = today.getMonth()
+}
+
+//functions to retrieve date and weekday from selected calendar dates
+function parseCalId(calid) {
+    var slicedid = calid.slice(4);
+    var parsings = slicedid.split("-");
+    return parsings;
+}
+
+function calSelect() {
+    this.classList.toggle("selectedDate");
+    parseCalId(this.id);
+    return false;
 }
