@@ -1,0 +1,52 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Set your availibility for a meeting" />
+
+    <title>Set Your Availibility</title>
+
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://glitch.com/edit/favicon-app.ico"
+      type="image/x-icon"
+    />
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/availibility.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Set Your Availibility
+      </h1>
+    </header>
+
+    <main>
+      <label
+        >Pick an availability level
+        <div id="status">
+          <button class="available" id="available">
+            Available
+          </button>
+          <button class="tentative" id="tentative">
+            Tentative
+          </button>
+          <button class="busy" id="busy">
+            Busy
+          </button>
+        </div>
+      </label>
+      <table id="calendar"></table>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
