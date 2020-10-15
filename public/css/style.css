@@ -6,15 +6,31 @@
 
 body {
   font-family: sans-serif;
-  margin: 2em 1em;
+  margin: 0;
   line-height: 1.5em;
+}
+
+header {
+  height: 40px;
+  padding-left: 10px;
+  line-height: 40px;
+  background-color: #3D3B30;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+main {
+  display: flex;
+  margin-top: 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
   font-style: italic;
   color: #373fff;
-  max-width: calc(100% - 5rem);
-  line-height: 1.1;
 }
 
 form {
@@ -22,7 +38,7 @@ form {
   display: grid;
   grid-gap: 1em;
   padding: 1em;
-  max-width: 40ch;
+  width: 40ch;
 }
 
 input {
@@ -37,7 +53,7 @@ input {
 form button {
   background-color: #bbbbf2;
   border: 2px solid currentColor;
-  border-radius: .25em;
+  border-radius: 0.25em;
   cursor: pointer;
   font-size: inherit;
   line-height: 1.4em;
@@ -52,7 +68,6 @@ form button:hover {
 footer {
   margin-top: 3em;
   padding-top: 1.5em;
-  border-top: 1px solid lightgrey;
 }
 
 table {

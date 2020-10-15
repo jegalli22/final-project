@@ -1,0 +1,63 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Set your availibility for a meeting" />
+
+    <title>Set Your Availibility</title>
+
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://glitch.com/edit/favicon-app.ico"
+      type="image/x-icon"
+    />
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/availability.css" />
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/availability.js" defer></script>
+  </head>
+  <body>
+    <header>
+      WeMeet
+    </header>
+
+    <main>
+      <h1>
+        Set Your Availibility
+      </h1>
+      <div id="content">
+        <div class="availability-selector" id="schedule">
+          <h3>Pick an availability level</h3>
+          <input type="radio" id="available" class="available" name="level" />
+          <label for="available">Available</label>
+          
+          <input type="radio" id="tentative" class="tentative" name="level" />
+          <label for="tentative">Tentative</label>
+          
+          <input type="radio" id="busy" class="busy" name="level" />
+          <label for="busy">Busy</label>
+          
+          <table id="calendar"></table>
+        </div>
+
+        <div id="chat"></div>
+      </div>
+    </main>
+
+    <footer></footer>
+  </body>
+
+  <script>
+    window.onload = function() {
+      console.log("schedID is " + schedID);
+      getID(schedID);
+    };
+  </script>
+</html>

@@ -6,9 +6,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Login page for scheduling site" />
+    <meta name="description" content="Join a meeting that has been previously created" />
 
-    <title>Log in to WeMeet</title>
+    <title>Join a Meeting</title>
 
     <link
       id="favicon"
@@ -17,23 +17,27 @@
       type="image/x-icon"
     />
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+
 
     <!-- import the webpage's client-side javascript file -->
-    <script src="/script.js" defer></script>
+    <script src="/login.js" defer></script>
   </head>
   <body>
     <header>
-      <h1>
-        Log In
-      </h1>
+      WeMeet
     </header>
 
-    <main>
-      <form id="login">
+    <main>      
+      <h1>
+        Join a Meeting
+      </h1>
+      <form>
         <label>
           Schedule ID
           <input
+            id="schedule-id"
             name="schedule-id"
             type="text"
             maxlength="100"
@@ -44,6 +48,7 @@
         <label>
           Name
           <input
+            id="name"
             name="name"
             type="text"
             maxlength="100"
@@ -51,9 +56,10 @@
             placeholder="name"
           />
         </label>
-         <label>
+        <label>
           Email
           <input
+            id="email"
             name="email"
             type="text"
             maxlength="100"
@@ -61,7 +67,8 @@
             placeholder="email"
           />
         </label>
-        <button type="submit" id="submit-dream">Submit</button>
+        <button type="submit" id="submit-login" onclick="loginButton()">Join</button>
+        
       </form>
     </main>
 

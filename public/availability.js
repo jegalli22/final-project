@@ -1,34 +1,57 @@
-let table = document.getElementById("calendar"),
+// get html elements and set status var
+const table = document.getElementById("calendar"),
   available = document.getElementById("available"),
-    tentative = document.getElementById("tentative"),
-    busy = document.getElementById("busy"),
-    status = "available";
+  tentative = document.getElementById("tentative"),
+  busy = document.getElementById("busy");
+let status = "available";
 
-const loadCalendar = function(days, startTime, endTime) {
-  let cellNum = 1;
+const getID = function(ID){
+    const json = {scheduleID: ID},
+          body = JSON.stringify(json);
+
+  fetch("/getMeeting", {
+    method: "POST",
+    body,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(response => response.json())
+    .then(json => {
+        loadCalendar(json)
+    });
+
+}
+
+// load a given calendar with days and times
+const loadCalendar = function(schedule) {
+  let days = schedule.days,
+    startTime = schedule.start,
+    endTime = schedule.end,
+    cellNum = 1;
 
   let dayHeader = table.createTHead(),
     dayRow = dayHeader.insertRow(0),
     timeCol = dayRow.insertCell(0);
 
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < days.length; i++) {
     let newDay = dayRow.insertCell(cellNum);
     cellNum++;
 
-    if (arr[i].getDay() == 0) {
-      newDay.innerHTML = "Sunday";
-    } else if (arr[i].getUTCDay() == 1) {
+    if (days[i].getDay() == "0") {
       newDay.innerHTML = "Monday";
-    } else if (arr[i].getUTCDay() == 2) {
+    } else if (days[i].getUTCDay() == "1") {
       newDay.innerHTML = "Tuesday";
-    } else if (arr[i].getUTCDay() == 3) {
+    } else if (days[i].getUTCDay() == "2") {
       newDay.innerHTML = "Wednesday";
-    } else if (arr[i].getUTCDay() == 4) {
+    } else if (days[i].getUTCDay() == "3") {
       newDay.innerHTML = "Thursday";
-    } else if (arr[i].getUTCDay() == 5) {
+    } else if (days[i].getUTCDay() == "4") {
       newDay.innerHTML = "Friday";
-    } else if (arr[i].getUTCDay() == 6) {
+    } else if (days[i].getUTCDay() == "5") {
       newDay.innerHTML = "Saturday";
+    } else if (days[i].getUTCDay() == "6") {
+      newDay.innerHTML = "Sunday";
     }
   }
 
@@ -38,12 +61,12 @@ const loadCalendar = function(days, startTime, endTime) {
 
     for (let d = 1; d < cellNum; d++) {
       let cell = newTimeRow.insertCell(d);
-      
+
       cell.style.cursor = "pointer";
 
       cell.addEventListener("click", function() {
-        console.log(status)
-        
+        console.log(status);
+
         if (status == "available") {
           cell.style.backgroundColor = "lightgreen";
         } else if (status == "tentative") {
@@ -78,10 +101,3 @@ busy.addEventListener("click", function() {
   status = "busy";
 });
 
-let date1 = new Date(2020, 5, 0);
-let date2 = new Date(2020, 5, 1);
-let date3 = new Date(2020, 5, 3);
-
-let arr = [date1, date2, date3];
-
-window.onload = loadCalendar(arr, 9, 17);
