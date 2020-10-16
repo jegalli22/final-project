@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WeMeet Scheduling">
+
+     <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/availability.css" />
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/scriptsCombined.js" defer></script>
+  </head>
+  <body>
+    <div id="availTable" style="display: inline-block;"></div>
+    <div id="colorbar" style="display: inline-block;"></div>
+    <div id="chat">space for the chat</div>
+    
+    <table id="listPeople">
+        <th>
+            <td>Available</td>
+            <td>Flexible</td>
+            <td>Busy</td>
+        </th>
+        <tr>
+            <td id="listAvailPeople"></td>
+            <td id="listFlexPeople"></td>
+            <td id="listBusyPeople"></td>
+        </tr>
+    </table>
+  </body>
+</html>

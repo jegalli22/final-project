@@ -5,9 +5,11 @@ const table = document.getElementById("calendar"),
   busy = document.getElementById("busy");
 let status = "available";
 
-const getID = function(ID){
-    const json = {scheduleID: ID},
-          body = JSON.stringify(json);
+console.log(table);
+
+const getID = function(ID) {
+  const json = { scheduleID: ID },
+    body = JSON.stringify(json);
 
   fetch("/getMeeting", {
     method: "POST",
@@ -18,14 +20,13 @@ const getID = function(ID){
   })
     .then(response => response.json())
     .then(json => {
-        loadCalendar(json)
+      loadCalendar(json);
     });
-
-}
+};
 
 // load a given calendar with days and times
 const loadCalendar = function(schedule) {
-  let days = schedule.days,
+  let days = schedule.daysOfWeek,
     startTime = schedule.start,
     endTime = schedule.end,
     cellNum = 1;
@@ -68,11 +69,11 @@ const loadCalendar = function(schedule) {
         console.log(status);
 
         if (status == "available") {
-          cell.style.backgroundColor = "lightgreen";
+          cell.style.backgroundColor = "#64CE8D";
         } else if (status == "tentative") {
-          cell.style.backgroundColor = "lightblue";
+          cell.style.backgroundColor = "#EEDA95";
         } else if (status == "busy") {
-          cell.style.backgroundColor = "coral";
+          cell.style.backgroundColor = "#FFA69E";
         }
       });
     }
@@ -91,13 +92,15 @@ const loadCalendar = function(schedule) {
 
 available.addEventListener("click", function() {
   status = "available";
+  console.log(status)
 });
 
 tentative.addEventListener("click", function() {
   status = "tentative";
+  console.log(status)
 });
 
 busy.addEventListener("click", function() {
   status = "busy";
+  console.log(status)
 });
-

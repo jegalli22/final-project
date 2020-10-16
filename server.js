@@ -2,6 +2,7 @@
 const express = require("express"),
   mongodb = require("mongodb"),
   bodyParser = require("body-parser"),
+  dotenv = require("dotenv").config(),
   app = express();
 var cookieParser = require("cookie-parser");
 
@@ -16,7 +17,7 @@ let email = null;
 //////////////CONNECT TO DB//////////////
 
 const MongoClient = mongodb.MongoClient;
-const uri = `mongodb+srv://jenna_galli:${process.env.DBPASS}@generatorapp.l0gsu.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://jenna_galli:${process.env.DB_PASSWORD}@userdata.84jsw.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -26,14 +27,19 @@ const client = new MongoClient(uri, {
 let collection = null;
 let collectionMeeting = null;
 
+// mongodb.UserData.remove( { } );
+
 client
   .connect()
   .then(() => {
     // will only create collection if it doesn't exist
+    // quickly clear the test data
+    // client.db("finalProjectDatabase").collection("meetingData").remove({});
+    // client.db("finalProjectDatabase").collection("UserData").remove({});
     return client.db("finalProjectDatabase").collection("UserData");
   })
   .then(__collection => {
-    console.log('collection' + __collection)
+    console.log("collection" + __collection);
     // store reference to collection
     collection = __collection;
     // blank query returns all documents
@@ -66,7 +72,11 @@ client
 app.use(express.static("public"));
 
 app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/availability.html");
+  response.sendFile(__dirname + "/views/index.html");
+});
+
+app.get("/index.html", (request, response) => {
+  response.sendFile(__dirname + "/views/index.html");
 });
 
 app.get("/login.html", (request, response) => {
@@ -74,13 +84,15 @@ app.get("/login.html", (request, response) => {
 });
 
 app.get("/meetingMaker.html", (request, response) => {
-  //console.log(__dirname + "/views/meetingMaker.html")
   response.sendFile(__dirname + "/views/meetingMaker.html");
 });
 
 app.get("/availability.html", (request, response) => {
-  console.log("here");
   response.sendFile(__dirname + "/views/availability.html");
+});
+
+app.get("/scheduling.html", (request, response) => {
+  response.sendFile(__dirname + "/views/scheduling.html");
 });
 
 let objAdd;
@@ -92,9 +104,10 @@ app.post(
     name = req.body.name;
     email = req.body.email;
 
-    //console.log(scheduleID + ' ' + name + ' ' + email)
+    console.log("add call");
 
     if (scheduleID != null && name != null && email != null) {
+      console.log(scheduleID + " " + name + " " + email);
       objAdd = {
         scheduleID: scheduleID,
         name: name,
@@ -132,7 +145,7 @@ app.post(
         scheduleID: scheduleID,
         name: name,
         email: email,
-        daysOfWeek: req.body.daysOfWeek,
+        days: req.body.days,
         start: req.body.start,
         end: req.body.end
       };
@@ -166,8 +179,16 @@ app.post("/update", bodyParser.json(), (req, res) => {
   }
 });
 
-app.get("/getMeeting", function(req, res) {
-  collectionMeeting
+app.post("/getMeeting", function(req, res) {
+   collectionMeeting.test.find( { arr:  { $elemMatch: req.body.scheduleID }  } ).toArray().then(result => res.json(result));
+  // collectionMeeting.articles
+  //   .find({ scheduleID: req.body.scheduleID })
+  //   .toArray()
+  //   .then(result => res.json(result));
+});
+
+app.post("/getSched", function(req, res) {
+  collection
     .find({ scheduleID: req.body.scheduleID })
     .toArray()
     .then(result => res.json(result));

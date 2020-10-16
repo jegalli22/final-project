@@ -18,11 +18,12 @@ header {
   color: white;
   font-size: 25px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 main {
   display: flex;
-  margin-top: 100px;
+  margin-top: 50px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

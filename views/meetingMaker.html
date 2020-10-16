@@ -21,17 +21,16 @@
     <link rel="stylesheet" href="css/meetingMaker.css" />
 
     <!-- import the webpage's client-side javascript file -->
-    <script src="/meetingMaker.js" defer></script>
-    <script src="/availability.js" defer></script>
+    <script src="/scriptsCombined.js" defer></script>
   </head>
   <body>
-    <header>
+    <header id="home" onclick="callHome()">
       WeMeet
     </header>
 
     <main>
       <h1>
-        Create Meeting
+        Create Schedule
       </h1>
       <form>
         <div id="nameEmail">
@@ -66,6 +65,9 @@
             Select days of the week
           </h3>
 
+          <input type="checkbox" id="weekday-sun" class="weekday" />
+          <label for="weekday-sun">S</label>
+
           <input
             type="checkbox"
             id="weekday-mon"
@@ -81,16 +83,13 @@
           <label for="weekday-wed">W</label>
 
           <input type="checkbox" id="weekday-thu" class="weekday" />
-          <label for="weekday-thu">T</label>
+          <label for="weekday-thu">R</label>
 
           <input type="checkbox" id="weekday-fri" class="weekday" />
           <label for="weekday-fri">F</label>
 
           <input type="checkbox" id="weekday-sat" class="weekday" />
           <label for="weekday-sat">S</label>
-
-          <input type="checkbox" id="weekday-sun" class="weekday" />
-          <label for="weekday-sun">S</label>
         </div>
 
         <div>
@@ -98,13 +97,63 @@
             Select times of day
           </h3>
           <label for="startTime">Start time: </label>
-          <input type="time" id="startTime" />
+          <select name="start" id="startTime">
+            <option value="0">12 AM</option>
+            <option value="1">1 AM</option>
+            <option value="2">2 AM</option>
+            <option value="3">3 AM</option>
+            <option value="4">4 AM</option>
+            <option value="5">5 AM</option>
+            <option value="6">6 AM</option>
+            <option value="7">7 AM</option>
+            <option value="8">8 AM</option>
+            <option value="9" selected>9 AM</option>
+            <option value="10">10 AM</option>
+            <option value="11">11 AM</option>
+            <option value="12">12 PM</option>
+            <option value="13">1 PM</option>
+            <option value="14">2 PM</option>
+            <option value="15">3 PM</option>
+            <option value="16">4 PM</option>
+            <option value="17">5 PM</option>
+            <option value="18">6 PM</option>
+            <option value="19">7 PM</option>
+            <option value="20">8 PM</option>
+            <option value="21">9 PM</option>
+            <option value="22">10 PM</option>
+            <option value="23">11 PM</option>
+          </select>
 
           <label for="endTime">End time: </label>
-          <input type="time" id="endTime" />
+          <select name="end" id="endTime">
+            <option value="0">12 AM</option>
+            <option value="1">1 AM</option>
+            <option value="2">2 AM</option>
+            <option value="3">3 AM</option>
+            <option value="4">4 AM</option>
+            <option value="5">5 AM</option>
+            <option value="6">6 AM</option>
+            <option value="7">7 AM</option>
+            <option value="8">8 AM</option>
+            <option value="9">9 AM</option>
+            <option value="10">10 AM</option>
+            <option value="11">11 AM</option>
+            <option value="12">12 PM</option>
+            <option value="13">1 PM</option>
+            <option value="14">2 PM</option>
+            <option value="15">3 PM</option>
+            <option value="16">4 PM</option>
+            <option value="17" selected>5 PM</option>
+            <option value="18">6 PM</option>
+            <option value="19">7 PM</option>
+            <option value="20">8 PM</option>
+            <option value="21">9 PM</option>
+            <option value="22">10 PM</option>
+            <option value="23">11 PM</option>
+          </select>
         </div>
 
-        <button type="submit" id="submit-meeting" onclick="MeetingButton()">
+        <button type="submit" id="submit-meeting" onclick="callToMaker()">
           Create
         </button>
       </form>
